@@ -20,7 +20,7 @@ jobs:
         env:
           CI: true
       - name: Build Project
-        if: githus.even_name == 'push'
+        if: github.even_name == 'push'
         run: npm run build
       - name: Deploy to staging
         if: github.event_name == 'push'
