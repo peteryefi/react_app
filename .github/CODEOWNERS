@@ -1,0 +1,4 @@
+* @peteryefi
+*.js @peteryefi
+*.yml @peteryefi
+/public/ @peteryefi
