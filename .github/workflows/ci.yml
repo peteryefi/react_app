@@ -10,18 +10,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Use NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: "16.x"
       - run: npm ci
       - run: npm run format:check
-      - run: npm test --coverage
+      - run: |
+          npm test -- --coverage
+          ls -la
         env:
           CI: true
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v1
+        with:
+          name: code-coverage
+          path: coverage
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
+      - name: Upload Build Folder
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: build
       - name: Deploy to staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain far-flesh.surge.sh
