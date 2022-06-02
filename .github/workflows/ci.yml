@@ -24,7 +24,7 @@ jobs:
       - run: npm ci
       - run: npm run format:check
       - run: |
-          npm test --coverage
+          npm test -- --coverage
           ls -la
         env:
           CI: true
