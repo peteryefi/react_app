@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ls -la
-      - uses: ./github/actions/hello
+      - uses: ./.github/actions/hello
         id: hello
         with:
           who-to-greet: "Peter Yefi"
