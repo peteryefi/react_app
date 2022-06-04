@@ -15,7 +15,7 @@ jobs:
             peteryefi
       - run: |
           echo ${{ steps.issue.output.issue }}
-      - uses: ./.github/actions/hello
+      - uses: ./.github/actions/hello-docker
         id: hello
         with:
           who-to-greet: "Peter Yefi"
