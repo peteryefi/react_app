@@ -12,3 +12,4 @@ jobs:
           who-to-greet: "Peter Yefi"
       - run: |
           echo "Time: ${{ steps.hello.outputs.time }}"
+          echo $HELLO
